@@ -2,19 +2,21 @@ const express = require('express');
 const router = express.Router();
 
 const userService = require('../services/userService');
+const { tryCatch } = require('../utils/tryCatch');
 
 // #region Apis
 
-router.get('/users', async (req, res) => {
-    try {
-        const user = await userService.GetAll();
+router.get('/users',
+    tryCatch(
+        async (req, res) => {
 
-        res.status(200).send(user);
-    } catch (error) {
-        res.status(400).send({ error: error.message });
-    }
+            const user = await userService.GetAll();
 
-});
+            res.status(200).send(user);
+
+
+        })
+);
 
 router.get('/users/:id', async (req, res) => {
     try {

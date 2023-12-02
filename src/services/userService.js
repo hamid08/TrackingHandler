@@ -20,6 +20,7 @@ async function CreateUser(user) {
 }
 
 async function GetAll() {
+    throw Error('gfgfgf');
     const users = await User.find();
     return users;
 }

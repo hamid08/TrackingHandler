@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const errorHandler = require("./middleware/errorHandler");
 const routeManagement = require('./routeManagement');
 
 
@@ -25,6 +25,8 @@ mongoose.connect(process.env.MONGODB_URI)
 // Routes
 routeManagement.RegisterAllRoutes(app);
 
+
+app.use(errorHandler);
 
 // Start Server
 const port = process.env.PORT || 3000;
